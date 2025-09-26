@@ -120,6 +120,73 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+/**
+ * Auto-blocking for blog posts
+ * This function automatically creates blog-post blocks from metadata tables
+ */
+function autoBlockBlogPosts() {
+  // Check if we're on a blog post page
+  if (document.body.classList.contains('blog-post') || 
+      window.location.pathname.startsWith('/blog/') && 
+      window.location.pathname !== '/blog') {
+    
+    const main = document.querySelector('main');
+    if (!main) return;
+    
+    const tables = main.querySelectorAll('table');
+    
+    tables.forEach(table => {
+      const firstCell = table.querySelector('td, th');
+      if (firstCell) {
+        const cellText = firstCell.textContent.toLowerCase().trim();
+        
+        // Look for metadata tables (containing template, title, etc.)
+        if (cellText.includes('template') || 
+            cellText.includes('title') || 
+            cellText.includes('author') ||
+            cellText.includes('date')) {
+          
+          // Create blog-post block
+          const blogPostBlock = document.createElement('div');
+          blogPostBlock.className = 'blog-post block';
+          blogPostBlock.setAttribute('data-block-name', 'blog-post');
+          
+          // Move the table into the block
+          blogPostBlock.appendChild(table.cloneNode(true));
+          
+          // Insert at the beginning of main, before other content
+          const firstElement = main.firstElementChild;
+          if (firstElement) {
+            main.insertBefore(blogPostBlock, firstElement);
+          } else {
+            main.appendChild(blogPostBlock);
+          }
+          
+          // Remove the original table
+          table.remove();
+        }
+      }
+    });
+    
+    // Add blog-post class to body for styling
+    document.body.classList.add('blog-post');
+  }
+}
+
+/**
+ * Detect blog pages and add appropriate classes
+ */
+function detectBlogPages() {
+  const path = window.location.pathname;
+  
+  if (path === '/blog' || path === '/blog/') {
+    document.body.classList.add('blog-index');
+  } else if (path.startsWith('/blog/') && path !== '/blog') {
+    document.body.classList.add('blog-post');
+  }
+}
+
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
