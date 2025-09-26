@@ -1,0 +1,210 @@
+.blog-tags-container {
+  background: var(--overlay-background-color);
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+.blog-tags-title {
+  margin: 0 0 1.5rem 0;
+  color: var(--heading-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Cloud Layout (Default) */
+.blog-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.blog-tags-list.cloud {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* List Layout */
+.blog-tags-list.list {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.blog-tags-list.list .blog-tag {
+  justify-self: flex-start;
+  width: fit-content;
+}
+
+/* Tag Styling */
+.blog-tag {
+  background: var(--background-color);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  border: 1px solid var(--overlay-background-color);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.blog-tag:hover {
+  background: var(--link-color);
+  color: white;
+  border-color: var(--link-color);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.blog-tag:active {
+  transform: translateY(0);
+}
+
+/* Tag Count */
+.blog-tag-count {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+/* Tag Size Variations based on count */
+.blog-tag[data-count="1"] {
+  font-size: 0.75rem;
+  padding: 0.375rem 0.75rem;
+}
+
+.blog-tag[data-count="2"],
+.blog-tag[data-count="3"] {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+.blog-tag[data-count="4"],
+.blog-tag[data-count="5"] {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+}
+
+.blog-tag[data-count^="6"],
+.blog-tag[data-count^="7"],
+.blog-tag[data-count^="8"],
+.blog-tag[data-count^="9"] {
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+}
+
+/* High usage tags (10+) */
+.blog-tag[data-count^="1"][data-count$="0"],
+.blog-tag[data-count^="1"][data-count$="1"],
+.blog-tag[data-count^="1"][data-count$="2"],
+.blog-tag[data-count^="1"][data-count$="3"],
+.blog-tag[data-count^="1"][data-count$="4"],
+.blog-tag[data-count^="1"][data-count$="5"],
+.blog-tag[data-count^="1"][data-count$="6"],
+.blog-tag[data-count^="1"][data-count$="7"],
+.blog-tag[data-count^="1"][data-count$="8"],
+.blog-tag[data-count^="1"][data-count$="9"],
+.blog-tag[data-count^="2"],
+.blog-tag[data-count^="3"],
+.blog-tag[data-count^="4"],
+.blog-tag[data-count^="5"] {
+  font-size: 1.1rem;
+  padding: 0.65rem 1.3rem;
+  font-weight: 700;
+  background: var(--link-color);
+  color: white;
+  border-color: var(--link-color);
+}
+
+/* Show More Button */
+.blog-tags-more {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.blog-tags-show-more {
+  background: transparent;
+  color: var(--link-color);
+  border: 1px solid var(--link-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+.blog-tags-show-more:hover {
+  background: var(--link-color);
+  color: white;
+}
+
+/* Empty and Error States */
+.blog-tags-empty,
+.blog-tags-error {
+  color: var(--text-color);
+  font-style: italic;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.blog-tags-error {
+  color: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .blog-tags-container {
+    padding: 1.5rem 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .blog-tags-list {
+    gap: 0.5rem;
+  }
+  
+  /* Smaller tags on mobile */
+  .blog-tag {
+    font-size: 0.75rem !important;
+    padding: 0.375rem 0.75rem !important;
+  }
+  
+  .blog-tag[data-count^="1"][data-count$="0"],
+  .blog-tag[data-count^="1"][data-count$="1"],
+  .blog-tag[data-count^="1"][data-count$="2"],
+  .blog-tag[data-count^="1"][data-count$="3"],
+  .blog-tag[data-count^="1"][data-count$="4"],
+  .blog-tag[data-count^="1"][data-count$="5"],
+  .blog-tag[data-count^="1"][data-count$="6"],
+  .blog-tag[data-count^="1"][data-count$="7"],
+  .blog-tag[data-count^="1"][data-count$="8"],
+  .blog-tag[data-count^="1"][data-count$="9"],
+  .blog-tag[data-count^="2"],
+  .blog-tag[data-count^="3"],
+  .blog-tag[data-count^="4"],
+  .blog-tag[data-count^="5"] {
+    font-size: 0.875rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+}
+
+/* Animation for new tags when "Show More" is clicked */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blog-tag {
+  animation: fadeInUp 0.3s ease-out;
+}
